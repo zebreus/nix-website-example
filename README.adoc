@@ -2,11 +2,12 @@
 
 == tldr;
 
-1. Copy link:default.nix[`default.nix`], link:flake.nix[] and link:.github/workflows/pages.yml[] to your repo.
-2. Adjust the `buildPhase` and `installPhase` in default.nix to build your site.
-3. Commit and push to github.
-4. Wait for the action to finish.
-5. Enjoy your site at https://your-github-username.github.io/your-repo-name/
+1. Goto the settings of your repo, select the pages tab and set *Source* to *GitHub Actions*.
+2. Copy link:default.nix[default.nix], link:flake.nix[] and link:.github/workflows/pages.yml[] to your repo.
+3. Adjust the `buildPhase` and `installPhase` in default.nix to build your site.
+4. Commit and push to github.
+
+Your site is available at https://your-github-username.github.io/your-repo-name/ after the Deploy Pages action is done (~1 min).
 
 == Building the website root with nix
 

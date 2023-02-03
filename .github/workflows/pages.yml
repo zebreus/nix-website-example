@@ -26,11 +26,6 @@ jobs:
         uses: nixbuild/nix-quick-install-action@v21
         with:
           nix_conf: experimental-features = nix-command flakes
-      - name: Enable pages
-        id: configure-pages
-        uses: actions/configure-pages@v2
-        with:
-          enablement: true
       - name: Build site
         run: nix build .#pages --print-build-logs
       - name: Adjust permissions
