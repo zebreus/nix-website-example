@@ -2,16 +2,18 @@
 
 == tldr;
 
-1. Copy [default.nix](default.nix), [flake.nix](flake.nix) and [.github/workflows/pages.yml](.github/workflows/pages.yml) to your repo.
-2. Adjust the buildPhase and installPhase in default.nix to build your site.
+1. Copy link:default.nix[`default.nix`], link:flake.nix[] and link:.github/workflows/pages.yml[] to your repo.
+2. Adjust the `buildPhase` and `installPhase` in default.nix to build your site.
 3. Commit and push to github.
+4. Wait for the action to finish.
+5. Enjoy your site at https://your-github-username.github.io/your-repo-name/
 
 == Building the website root with nix
 
 First you need a nix derivation that builds the root of your page. In this example we will look at the derivation building this page:
 
-.default.nix
 [source,nix]
+.default.nix
 ----
 include::default.nix[]
 ----
@@ -20,8 +22,9 @@ In it we define the dependencies required to build the page, in this case only `
 
 We also have a nix flake to serve as an entrypoint to out script. It also contains small a script to start a local preview of your page. 
 
-.flake.nix
+
 [source,nix]
+.flake.nix
 ----
 include::flake.nix[]
 ----
@@ -32,7 +35,7 @@ By executing `nix run .` you can start a local preview of your page.
 
 == Deploying to github pages
 
-To setup deployment to github pages you need to go to your repository settings, then to the pages tab, and set `Source` to `GitHub Actions`.
+To setup deployment to github pages you need to go to your repository settings, then to the pages tab, and set *Source* to *GitHub Actions*.
 
 image::screenshot.webp[]
 
@@ -40,10 +43,11 @@ That should be all the configuration you need to do in github. The last step is 
 
 To do that you just need to add the following file to your repo
 
-..github/workflows/pages.yml
+
 [source,nix]
+..github/workflows/pages.yml
 ----
 include::.github/workflows/pages.yml[]
 ----
 
-When you commit and push your files a action should be triggered that deploys everything to github pages.
+When you commit and push your files a action should be triggered that deploys to github pages. You can now view your page at https://your-github-username.github.io/your-repo-name/
