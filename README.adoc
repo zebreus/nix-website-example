@@ -1,0 +1,49 @@
+# Host your static website with github pages and nix flakes
+
+== tldr;
+
+1. Copy [default.nix](default.nix), [flake.nix](flake.nix) and [.github/workflows/pages.yml](.github/workflows/pages.yml) to your repo.
+2. Adjust the buildPhase and installPhase in default.nix to build your site.
+3. Commit and push to github.
+
+== Building the website root with nix
+
+First you need a nix derivation that builds the root of your page. In this example we will look at the derivation building this page:
+
+.default.nix
+[source,nix]
+----
+include::default.nix[]
+----
+
+In it we define the dependencies required to build the page, in this case only `asciidoctor`. In the `buildPhase` we execute the commands to generate our html files. In the `installPhase` we copy all the generated files to the output at `$out`. The output will be the root of our page.
+
+We also have a nix flake to serve as an entrypoint to out script. It also contains small a script to start a local preview of your page. 
+
+.flake.nix
+[source,nix]
+----
+include::flake.nix[]
+----
+
+You can copy these files to your repository and adjust the build process in `default.nix` for your project.
+
+By executing `nix run .` you can start a local preview of your page.
+
+== Deploying to github pages
+
+To setup deployment to github pages you need to go to your repository settings, then to the pages tab, and set `Source` to `GitHub Actions`.
+
+image::screenshot.webp[]
+
+That should be all the configuration you need to do in github. The last step is to add a github action to deploy your website on every commit.
+
+To do that you just need to add the following file to your repo
+
+..github/workflows/pages.yml
+[source,nix]
+----
+include::.github/workflows/pages.yml[]
+----
+
+When you commit and push your files a action should be triggered that deploys everything to github pages.
