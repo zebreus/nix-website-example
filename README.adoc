@@ -32,18 +32,15 @@ First you need a nix derivation that builds the root of your page. In this examp
 include::default.nix[]
 ----
 
-In it we define the dependencies required to build the page, in this case only `asciidoctor`. In the `buildPhase` we execute some commands to generate our html files. In the `installPhase` we copy the files we need to the output at `$out`. `$out` will be the root of our page.
+In it the dependencies required to build the page are defined, in this case only `asciidoctor`. In the `buildPhase` we execute some commands to generate our html files. In the `installPhase` we copy the files we need to the output at `$out`. `$out` will be the root of our page.
 
-We also have a nix flake to serve as an entrypoint to out script. It also contains small a script to start a local preview of your page. 
+We also have a nix flake to serve as an entrypoint to the derivation. It also contains a script to build and preview your website locally.
 
-.flake.nix
-[%collapsible]
-====
 [source,nix]
+.flake.nix
 ----
 include::flake.nix[]
 ----
-====
 
 You can copy these files to your repository and adjust the build process in default.nix for your project. You don't need to modify flake.nix.
 
